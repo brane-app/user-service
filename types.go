@@ -1,5 +1,39 @@
 package main
 
+import (
+	"github.com/gastrodon/groudon"
+)
+
+func ValidNick(it interface{}) (ok bool, _ error) {
+	var nick string
+	if nick, ok = it.(string); !ok {
+		return
+	}
+
+	ok = 63 >= len(nick) && len(nick) >= 4
+	return
+}
+
+func ValidPass(it interface{}) (ok bool, _ error) {
+	var pass string
+	if pass, ok = it.(string); !ok {
+		return
+	}
+
+	ok = len(pass) >= 8
+	return
+}
+
+func ValidBio(it interface{}) (ok bool, _ error) {
+	var bio string
+	if bio, ok = it.(string); !ok {
+		return
+	}
+
+	ok = len(bio) <= 63
+	return
+}
+
 type CreateUserBody struct {
 	Nick     string `json:"nick"`
 	Password string `json:"password"`
@@ -7,12 +41,12 @@ type CreateUserBody struct {
 	Bio      string `json:"bio"`
 }
 
-func (_ CreateUserBody) Types() (values map[string]string) {
-	values = map[string]string{
-		"nick":     "string",
-		"password": "string",
-		"email":    "string",
-		"bio":      "string",
+func (_ CreateUserBody) Validators() (values map[string]func(interface{}) (bool, error)) {
+	values = map[string]func(interface{}) (bool, error){
+		"nick":     ValidNick,
+		"password": ValidPass,
+		"email":    groudon.ValidEmail,
+		"bio":      ValidBio,
 	}
 
 	return

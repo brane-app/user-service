@@ -102,12 +102,12 @@ func Test_PostUser_Conflicts(test *testing.T) {
 		"email": mustMarshal(map[string]string{
 			"email":    email,
 			"nick":     "unused",
-			"password": "unused",
+			"password": "longer_unused",
 		}),
 		"nick": mustMarshal(map[string]string{
 			"email":    "unused@bar.com",
 			"nick":     nick,
-			"password": "unused",
+			"password": "longer_unused",
 		}),
 	}
 
@@ -135,7 +135,7 @@ func Test_PostUser_Conflicts(test *testing.T) {
 }
 
 func Test_PostUser(test *testing.T) {
-	var new_nick, new_email string = "new", "new@bar.com"
+	var new_nick, new_email string = "longer_new", "new@bar.com"
 	var data []byte = mustMarshal(map[string]interface{}{
 		"nick":     new_nick,
 		"email":    new_email,
