@@ -12,6 +12,11 @@ var (
 	no_such_user map[string]interface{} = map[string]interface{}{"error": "no_such_user"}
 )
 
+func pathSplit(it rune) (ok bool) {
+	ok = it == '/'
+	return
+}
+
 func getUserID(request *http.Request) (code int, r_map map[string]interface{}, err error) {
 	code, r_map, err = getUserKey("id", request)
 	return
@@ -23,8 +28,8 @@ func getUserNick(request *http.Request) (code int, r_map map[string]interface{},
 }
 
 func getUserKey(key string, request *http.Request) (code int, r_map map[string]interface{}, err error) {
-	var split []string = strings.Split(strings.TrimSuffix(request.URL.Path, "/"), "/")
-	var query string = split[len(split)-1]
+	var parts []string = strings.FieldsFunc(request.URL.Path, pathSplit)
+	var query string = parts[len(parts)-1]
 
 	var fetched monketype.User
 	var exists bool
