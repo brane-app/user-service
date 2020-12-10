@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gastrodon/groudon"
+	"github.com/imonke/monkelib"
 )
 
 func ValidNick(it interface{}) (ok bool, _ error) {
@@ -10,7 +11,7 @@ func ValidNick(it interface{}) (ok bool, _ error) {
 		return
 	}
 
-	ok = 63 >= len(nick) && len(nick) >= 4
+	ok = monkelib.NickRegex.MatchString(nick)
 	return
 }
 

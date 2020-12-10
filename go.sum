@@ -19,8 +19,11 @@ github.com/imonke/monkebase v0.0.0-20200719031609-9a6b2e7df88f h1:XnGe+P9XuTIYcA
 github.com/imonke/monkebase v0.0.0-20200719031609-9a6b2e7df88f/go.mod h1:BLU+UOnHsn9p2atIqkVb7Pp4eqlgEKJbaO5qJfmrOHM=
 github.com/imonke/monkebase v0.0.0-20200729040815-7b886535f0f7 h1:uP0pTRkjCrfIadiGjb2vvqx+80Yp071VzfSMWmRDPSo=
 github.com/imonke/monkebase v0.0.0-20200729040815-7b886535f0f7/go.mod h1:4LVGEd9tPFV87yLMhJzpsHz5qxWiJZ8DozqUgUW5/EU=
+github.com/imonke/monkebase v0.0.0-20201111032832-5890c2b1cc4c/go.mod h1:ZfXu2Q+i8POwrgitRKY9YI2L+HeH7u2ZpGpBUdmlNgM=
 github.com/imonke/monkebase v0.0.0-20201112031310-8b05081cb292 h1:sMwUtT4hI4ki8fdabPGPMbufmD34D1ww/KSO564xIaM=
 github.com/imonke/monkebase v0.0.0-20201112031310-8b05081cb292/go.mod h1:ZfXu2Q+i8POwrgitRKY9YI2L+HeH7u2ZpGpBUdmlNgM=
+github.com/imonke/monkelib v0.0.0-20201210004800-3a34cb5eb437 h1:S5QuV0M82m4bVXYP7nU5w8GDkBAlgbdGb2PymVoifD4=
+github.com/imonke/monkelib v0.0.0-20201210004800-3a34cb5eb437/go.mod h1:fMKAREH16VjiipDCbErwFYxd/lQlqAIQjE5HPgIp+ms=
 github.com/imonke/monketype v0.0.0-20200702003911-d46b79f825eb/go.mod h1:/6d6kpJ4zrDTyopAyygmuFmxxPDyxfnrxBkS2biIU9M=
 github.com/imonke/monketype v0.0.0-20200704082322-8bd39803870c h1:aIpkv4L0fjpAluXwUytA0+Gj31S14N6BI96lfZPU0Qc=
 github.com/imonke/monketype v0.0.0-20200704082322-8bd39803870c/go.mod h1:/6d6kpJ4zrDTyopAyygmuFmxxPDyxfnrxBkS2biIU9M=
@@ -50,6 +53,7 @@ golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899 h1:DZhuSZLsGlFL4CmhA8BcRA
 golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
 golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de h1:ikNHVSjEfnvz6sxdSPCaPt572qowuyMDMJLLm3Db3ig=
 golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
+golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
 golang.org/x/crypto v0.0.0-20201208171446-5f87f3452ae9 h1:sYNJzB4J8toYPQTM6pAkcmBRgw9SnQKP9oXCHfgy604=
 golang.org/x/crypto v0.0.0-20201208171446-5f87f3452ae9/go.mod h1:jdWPYTVW3xRLrWPugEBEK3UY2ZEsg3UU495nc5E+M+I=
 golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
