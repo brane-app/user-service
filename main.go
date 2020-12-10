@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gastrodon/groudon"
 	"github.com/imonke/monkebase"
+	"github.com/imonke/monkelib"
 
 	"log"
 	"net/http"
@@ -16,7 +17,7 @@ const (
 func main() {
 	monkebase.Connect(os.Getenv("MONKEBASE_CONNECTION"))
 	groudon.RegisterHandler("GET", "^/id/"+uuid_regex+"/?$", getUserID)
-	groudon.RegisterHandler("GET", "^/nick/.+/?$", getUserNick)
+	groudon.RegisterHandler("GET", "^/nick/"+monkelib.NICK_PATTERN+"/?$", getUserNick)
 	http.Handle("/", http.HandlerFunc(groudon.Route))
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
