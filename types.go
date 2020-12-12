@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gastrodon/groudon"
-	"github.com/imonke/monkelib"
+	"git.gastrodon.io/imonke/monkelib"
 )
 
 func ValidNick(it interface{}) (ok bool, _ error) {
