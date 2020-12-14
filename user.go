@@ -2,20 +2,15 @@ package main
 
 import (
 	"git.gastrodon.io/imonke/monkebase"
+	"git.gastrodon.io/imonke/monkelib"
 	"git.gastrodon.io/imonke/monketype"
 
 	"net/http"
-	"strings"
 )
 
 var (
 	no_such_user map[string]interface{} = map[string]interface{}{"error": "no_such_user"}
 )
-
-func pathSplit(it rune) (ok bool) {
-	ok = it == '/'
-	return
-}
 
 func getUserID(request *http.Request) (code int, r_map map[string]interface{}, err error) {
 	code, r_map, err = getUserKey("id", request)
@@ -28,7 +23,7 @@ func getUserNick(request *http.Request) (code int, r_map map[string]interface{},
 }
 
 func getUserKey(key string, request *http.Request) (code int, r_map map[string]interface{}, err error) {
-	var parts []string = strings.FieldsFunc(request.URL.Path, pathSplit)
+	var parts []string = monkelib.SplitPath(request.URL.Path)
 	var query string = parts[len(parts)-1]
 
 	var fetched monketype.User
