@@ -1,9 +1,9 @@
 package main
 
 import (
-	"git.gastrodon.io/imonke/monkebase"
-	"git.gastrodon.io/imonke/monkelib"
-	"git.gastrodon.io/imonke/monketype"
+	"github.com/brane-app/database-library"
+	"github.com/brane-app/tools-library"
+	"github.com/brane-app/types-library"
 
 	"net/http"
 )
@@ -23,16 +23,16 @@ func getUserNick(request *http.Request) (code int, r_map map[string]interface{},
 }
 
 func getUserKey(key string, request *http.Request) (code int, r_map map[string]interface{}, err error) {
-	var parts []string = monkelib.SplitPath(request.URL.Path)
+	var parts []string = tools.SplitPath(request.URL.Path)
 	var query string = parts[len(parts)-1]
 
-	var fetched monketype.User
+	var fetched types.User
 	var exists bool
 	switch key {
 	case "id":
-		fetched, exists, err = monkebase.ReadSingleUser(query)
+		fetched, exists, err = database.ReadSingleUser(query)
 	case "nick":
-		fetched, exists, err = monkebase.ReadSingleUserNick(query)
+		fetched, exists, err = database.ReadSingleUserNick(query)
 	}
 
 	if err != nil {

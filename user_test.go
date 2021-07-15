@@ -1,8 +1,8 @@
 package main
 
 import (
-	"git.gastrodon.io/imonke/monkebase"
-	"git.gastrodon.io/imonke/monketype"
+	"github.com/brane-app/database-library"
+	"github.com/brane-app/types-library"
 
 	"net/http"
 	"os"
@@ -16,10 +16,10 @@ const (
 )
 
 var (
-	user monketype.User = monketype.NewUser(nick, bio, email)
+	user types.User = types.NewUser(nick, bio, email)
 )
 
-func userOK(test *testing.T, fetched map[string]interface{}, target monketype.User) {
+func userOK(test *testing.T, fetched map[string]interface{}, target types.User) {
 	if fetched["id"].(string) != target.ID {
 		test.Errorf("id mismatch! have: %s, want: %s", fetched["id"], target.ID)
 	}
@@ -38,15 +38,15 @@ func userOK(test *testing.T, fetched map[string]interface{}, target monketype.Us
 }
 
 func TestMain(main *testing.M) {
-	monkebase.Connect(os.Getenv("DATABASE_CONNECTION"))
+	database.Connect(os.Getenv("DATABASE_CONNECTION"))
 
 	var err error
-	if monkebase.WriteUser(user.Map()); err != nil {
+	if database.WriteUser(user.Map()); err != nil {
 		panic(err)
 	}
 
 	var result int = main.Run()
-	monkebase.DeleteUser(user.ID)
+	database.DeleteUser(user.ID)
 	os.Exit(result)
 }
 
@@ -115,15 +115,15 @@ func Test_getUserNick(test *testing.T) {
 func Test_getUserNick_noSuchUser(test *testing.T) {
 	var nobody string = "foobar"
 
-	var stale monketype.User
+	var stale types.User
 	var exists bool
 	var err error
-	if stale, exists, err = monkebase.ReadSingleUserNick(nobody); err != nil {
+	if stale, exists, err = database.ReadSingleUserNick(nobody); err != nil {
 		test.Fatal(err)
 	}
 
 	if exists {
-		monkebase.DeleteUser(stale.ID)
+		database.DeleteUser(stale.ID)
 	}
 
 	var request *http.Request
