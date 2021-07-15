@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	monkebase.Connect(os.Getenv("MONKEBASE_CONNECTION"))
+	monkebase.Connect(os.Getenv("DATABASE_CONNECTION"))
 	groudon.RegisterHandler("POST", "^/$", postUser)
 	http.Handle("/", http.HandlerFunc(groudon.Route))
 	log.Fatal(http.ListenAndServe(":8000", nil))
