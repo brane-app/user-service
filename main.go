@@ -1,23 +1,19 @@
 package main
 
 import (
-	"git.gastrodon.io/imonke/monkebase"
-	"git.gastrodon.io/imonke/monkelib"
-	"github.com/gastrodon/groudon"
+	"github.com/brane-app/database-library"
+	"github.com/gastrodon/groudon/v2"
 
 	"log"
 	"net/http"
 	"os"
 )
 
-const (
-	uuid_regex = `[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}`
-)
-
 func main() {
-	monkebase.Connect(os.Getenv("MONKEBASE_CONNECTION"))
-	groudon.RegisterHandler("GET", "^/id/"+uuid_regex+"/?$", getUserID)
-	groudon.RegisterHandler("GET", "^/nick/"+monkelib.NICK_PATTERN+"/?$", getUserNick)
-	http.Handle("/", http.HandlerFunc(groudon.Route))
+	database.Connect(os.Getenv("DATABASE_CONNECTION"))
+
+	register_handlers()
+
+	http.Handle(os.Getenv("PATH_PREFIX")+"/", http.HandlerFunc(groudon.Route))
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
