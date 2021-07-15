@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/gastrodon/groudon"
-	"git.gastrodon.io/imonke/monkelib"
+	"github.com/brane-app/tools-library"
+	"github.com/gastrodon/groudon/v2"
 )
 
 func ValidNick(it interface{}) (ok bool, _ error) {
@@ -11,7 +11,7 @@ func ValidNick(it interface{}) (ok bool, _ error) {
 		return
 	}
 
-	ok = monkelib.NickRegex.MatchString(nick)
+	ok = tools.NickRegex.MatchString(nick)
 	return
 }
 

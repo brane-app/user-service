@@ -1,8 +1,8 @@
 package main
 
 import (
-	"git.gastrodon.io/imonke/monkebase"
-	"git.gastrodon.io/imonke/monketype"
+	"github.com/brane-app/database-library"
+	"github.com/brane-app/types-library"
 
 	"bytes"
 	"encoding/json"
@@ -18,7 +18,7 @@ const (
 )
 
 var (
-	user monketype.User
+	user types.User
 )
 
 func mustMarshal(it interface{}) (data []byte) {
@@ -31,16 +31,16 @@ func mustMarshal(it interface{}) (data []byte) {
 }
 
 func TestMain(main *testing.M) {
-	monkebase.Connect(os.Getenv("DATABASE_CONNECTION"))
-	user = monketype.NewUser(nick, "", email)
+	database.Connect(os.Getenv("DATABASE_CONNECTION"))
+	user = types.NewUser(nick, "", email)
 
 	var err error
-	if err = monkebase.WriteUser(user.Map()); err != nil {
+	if err = database.WriteUser(user.Map()); err != nil {
 		panic(err)
 	}
 
 	var result int = main.Run()
-	monkebase.DeleteUser(user.ID)
+	database.DeleteUser(user.ID)
 	os.Exit(result)
 }
 
@@ -159,10 +159,10 @@ func Test_PostUser(test *testing.T) {
 	}
 
 	var id string = r_map["user"].(map[string]interface{})["id"].(string)
-	defer monkebase.DeleteUser(id)
+	defer database.DeleteUser(id)
 
 	var exists bool
-	if _, exists, err = monkebase.ReadSingleUser(id); err != nil {
+	if _, exists, err = database.ReadSingleUser(id); err != nil {
 		test.Fatal(err)
 	}
 

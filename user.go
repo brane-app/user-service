@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/gastrodon/groudon"
-	"git.gastrodon.io/imonke/monkebase"
-	"git.gastrodon.io/imonke/monketype"
+	"github.com/brane-app/database-library"
+	"github.com/brane-app/types-library"
+	"github.com/gastrodon/groudon/v2"
 
 	"net/http"
 	"regexp"
@@ -14,12 +14,12 @@ var (
 )
 
 func checkConflicts(body CreateUserBody) (conflicts bool, key string, err error) {
-	if _, conflicts, err = monkebase.ReadSingleUserNick(body.Nick); conflicts || err != nil {
+	if _, conflicts, err = database.ReadSingleUserNick(body.Nick); conflicts || err != nil {
 		key = "nick"
 		return
 	}
 
-	if _, conflicts, err = monkebase.ReadSingleUserEmail(body.Email); conflicts || err != nil {
+	if _, conflicts, err = database.ReadSingleUserEmail(body.Email); conflicts || err != nil {
 		key = "email"
 		return
 	}
@@ -51,11 +51,11 @@ func postUser(request *http.Request) (code int, r_map map[string]interface{}, er
 		return
 	}
 
-	var created map[string]interface{} = monketype.NewUser(body.Nick, body.Bio, body.Email).Map()
-	if err = monkebase.WriteUser(created); err != nil {
+	var created map[string]interface{} = types.NewUser(body.Nick, body.Bio, body.Email).Map()
+	if err = database.WriteUser(created); err != nil {
 		return
 	}
-	if err = monkebase.SetPassword(created["id"].(string), body.Password); err != nil {
+	if err = database.SetPassword(created["id"].(string), body.Password); err != nil {
 		return
 	}
 
