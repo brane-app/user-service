@@ -1,4 +1,4 @@
-module git.gastrodon.io/imonke/user-create-service
+module github.com/brane-app/user-create-service
 
 go 1.13
 
