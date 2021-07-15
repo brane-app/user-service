@@ -15,7 +15,7 @@ const (
 )
 
 func main() {
-	monkebase.Connect(os.Getenv("MONKEBASE_CONNECTION"))
+	monkebase.Connect(os.Getenv("DATABASE_CONNECTION"))
 	groudon.RegisterHandler("GET", "^/id/"+uuid_regex+"/?$", getUserID)
 	groudon.RegisterHandler("GET", "^/nick/"+monkelib.NICK_PATTERN+"/?$", getUserNick)
 	http.Handle("/", http.HandlerFunc(groudon.Route))
