@@ -1,4 +1,4 @@
-module git.gastrodon.io/imonke/user-giver-service
+module github.com/brane-app/user-giver-service
 
 go 1.13
 
