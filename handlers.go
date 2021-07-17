@@ -14,7 +14,7 @@ var (
 	prefix = os.Getenv("PATH_PREFIX")
 
 	routeId   = "^" + prefix + "/id/" + uuid_regex + "/?$"
-	routeNick = "^" + prefix + "/nick/" + uuid_regex + "/?$"
+	routeNick = "^" + prefix + "/nick/.+/?$"
 )
 
 func register_handlers() {
