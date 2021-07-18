@@ -38,16 +38,10 @@ func userOK(test *testing.T, fetched map[string]interface{}, target types.User) 
 }
 
 func TestMain(main *testing.M) {
-	database.Connect(os.Getenv("DATABASE_CONNECTION"))
-
 	var err error
 	if database.WriteUser(user.Map()); err != nil {
 		panic(err)
 	}
-
-	var result int = main.Run()
-	database.DeleteUser(user.ID)
-	os.Exit(result)
 }
 
 func Test_getUserID(test *testing.T) {
