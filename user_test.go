@@ -30,18 +30,13 @@ func mustMarshal(it interface{}) (data []byte) {
 	return
 }
 
-func TestMain(main *testing.M) {
-	database.Connect(os.Getenv("DATABASE_CONNECTION"))
+func setup(main *testing.M) {
 	user = types.NewUser(nick, "", email)
 
 	var err error
 	if err = database.WriteUser(user.Map()); err != nil {
 		panic(err)
 	}
-
-	var result int = main.Run()
-	database.DeleteUser(user.ID)
-	os.Exit(result)
 }
 
 func Test_PostUser_badrequest(test *testing.T) {
