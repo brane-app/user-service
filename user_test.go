@@ -37,7 +37,7 @@ func userOK(test *testing.T, fetched map[string]interface{}, target types.User) 
 	}
 }
 
-func TestMain(main *testing.M) {
+func setup(main *testing.M) {
 	var err error
 	if database.WriteUser(user.Map()); err != nil {
 		panic(err)
