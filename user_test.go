@@ -5,7 +5,6 @@ import (
 	"github.com/brane-app/types-library"
 
 	"net/http"
-	"os"
 	"testing"
 )
 
