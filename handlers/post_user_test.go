@@ -1,23 +1,12 @@
-package main
+package handlers
 
 import (
 	"github.com/brane-app/database-library"
-	"github.com/brane-app/types-library"
 
 	"bytes"
 	"encoding/json"
 	"net/http"
 	"testing"
-)
-
-const (
-	email    = "foo@bar.com"
-	password = "foobar2000"
-	nick     = "foobar"
-)
-
-var (
-	user types.User
 )
 
 func mustMarshal(it interface{}) (data []byte) {
@@ -27,15 +16,6 @@ func mustMarshal(it interface{}) (data []byte) {
 	}
 
 	return
-}
-
-func setup(main *testing.M) {
-	user = types.NewUser(nick, "", email)
-
-	var err error
-	if err = database.WriteUser(user.Map()); err != nil {
-		panic(err)
-	}
 }
 
 func Test_PostUser_badrequest(test *testing.T) {
@@ -79,7 +59,7 @@ func Test_PostUser_badrequest(test *testing.T) {
 			test.Fatal(err)
 		}
 
-		if code, _, err = postUser(request); err != nil {
+		if code, _, err = PostUser(request); err != nil {
 			test.Fatal(err)
 		}
 
@@ -90,6 +70,8 @@ func Test_PostUser_badrequest(test *testing.T) {
 }
 
 func Test_PostUser_Conflicts(test *testing.T) {
+	database.WriteUser(user.Map())
+
 	var key string
 	var set []byte
 	var sets map[string][]byte = map[string][]byte{
@@ -114,7 +96,7 @@ func Test_PostUser_Conflicts(test *testing.T) {
 			test.Fatal(err)
 		}
 
-		if code, r_map, err = postUser(request); err != nil {
+		if code, r_map, err = PostUser(request); err != nil {
 			test.Fatal(err)
 		}
 
@@ -144,7 +126,7 @@ func Test_PostUser(test *testing.T) {
 
 	var code int
 	var r_map map[string]interface{}
-	if code, r_map, err = postUser(request); err != nil {
+	if code, r_map, err = PostUser(request); err != nil {
 		test.Fatal(err)
 	}
 

@@ -1,8 +1,10 @@
-package main
+package handlers
 
 import (
+	"github.com/brane-app/user-service/types"
+
 	"github.com/brane-app/database-library"
-	"github.com/brane-app/types-library"
+	library_types "github.com/brane-app/types-library"
 	"github.com/gastrodon/groudon/v2"
 
 	"net/http"
@@ -13,7 +15,7 @@ var (
 	email_regex *regexp.Regexp = regexp.MustCompile(`^[\w\+]+@[\w]+\.[\w\.]+$`)
 )
 
-func checkConflicts(body CreateUserBody) (conflicts bool, key string, err error) {
+func checkConflicts(body types.CreateUserBody) (conflicts bool, key string, err error) {
 	if _, conflicts, err = database.ReadSingleUserNick(body.Nick); conflicts || err != nil {
 		key = "nick"
 		return
@@ -27,8 +29,8 @@ func checkConflicts(body CreateUserBody) (conflicts bool, key string, err error)
 	return
 }
 
-func postUser(request *http.Request) (code int, r_map map[string]interface{}, err error) {
-	var body CreateUserBody
+func PostUser(request *http.Request) (code int, r_map map[string]interface{}, err error) {
+	var body types.CreateUserBody
 	var external error
 	err, external = groudon.SerializeBody(request.Body, &body)
 	switch {
@@ -51,7 +53,7 @@ func postUser(request *http.Request) (code int, r_map map[string]interface{}, er
 		return
 	}
 
-	var created map[string]interface{} = types.NewUser(body.Nick, body.Bio, body.Email).Map()
+	var created map[string]interface{} = library_types.NewUser(body.Nick, body.Bio, body.Email).Map()
 	if err = database.WriteUser(created); err != nil {
 		return
 	}
