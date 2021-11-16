@@ -9,7 +9,7 @@ import (
 var (
 	prefix = os.Getenv("PATH_PREFIX")
 
-	routeRoot = "^" + prefix + "/$"
+	routeRoot = "^" + prefix + "/?$"
 )
 
 func register_handlers() {
