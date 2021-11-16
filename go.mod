@@ -1,4 +1,4 @@
-module github.com/brane-app/user-create-service
+module github.com/brane-app/user-service
 
 go 1.13
 
