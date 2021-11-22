@@ -18,10 +18,13 @@ var (
 	routeRoot = "^" + prefix + "/?$"
 	routeId   = "^" + prefix + "/id/" + UUID_PATTERN + "/?$"
 	routeNick = "^" + prefix + "/nick/.+/?$"
+	route404  = "^" + prefix + "/(?:nick|id)/[^/]+/?$"
 )
 
 func register_handlers() {
 	groudon.AddHandler("POST", routeRoot, handlers.PostUser)
+
 	groudon.AddHandler("GET", routeId, handlers.GetUserID)
 	groudon.AddHandler("GET", routeNick, handlers.GetUserNick)
+	groudon.AddHandler("GET", route404, handlers.GetUser404)
 }

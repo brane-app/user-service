@@ -12,6 +12,12 @@ var (
 	no_such_user map[string]interface{} = map[string]interface{}{"error": "no_such_user"}
 )
 
+func GetUser404(_ *http.Request) (code int, r_map map[string]interface{}, _ error) {
+	code = 404
+	r_map = no_such_user
+	return
+}
+
 func GetUserID(request *http.Request) (code int, r_map map[string]interface{}, err error) {
 	code, r_map, err = getUserKey("id", request)
 	return
