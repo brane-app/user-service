@@ -8,11 +8,6 @@ import (
 	"github.com/gastrodon/groudon/v2"
 
 	"net/http"
-	"regexp"
-)
-
-var (
-	email_regex *regexp.Regexp = regexp.MustCompile(`^[\w\+]+@[\w]+\.[\w\.]+$`)
 )
 
 func checkConflicts(body types.CreateUserBody) (conflicts bool, key string, err error) {
@@ -36,7 +31,7 @@ func PostUser(request *http.Request) (code int, r_map map[string]interface{}, er
 	switch {
 	case err != nil:
 		return
-	case external != nil, !email_regex.MatchString(body.Email):
+	case external != nil:
 		code = 400
 		return
 	}
