@@ -1,7 +1,7 @@
 package types
 
 import (
-	"github.com/brane-app/tools-library"
+	"github.com/brane-app/librane/tools"
 	"github.com/gastrodon/groudon/v2"
 )
 

@@ -3,8 +3,8 @@ package handlers
 import (
 	"github.com/brane-app/user-service/types"
 
-	"github.com/brane-app/database-library"
-	library_types "github.com/brane-app/types-library"
+	"github.com/brane-app/librane/database"
+	library_types "github.com/brane-app/librane/types"
 	"github.com/gastrodon/groudon/v2"
 
 	"net/http"
